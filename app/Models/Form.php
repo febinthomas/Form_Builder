@@ -35,6 +35,9 @@ class Form extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the fields that owns the Form.
+     */
     public function fields(): HasMany
     {
         return $this->hasMany(FormField::class);

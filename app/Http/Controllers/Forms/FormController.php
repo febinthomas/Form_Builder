@@ -8,6 +8,7 @@ use App\Models\Form;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Http\Controllers\Controller;
+use App\Models\FormFieldType;
 use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
@@ -18,7 +19,10 @@ class FormController extends Controller
     public function index()
     {
         return Inertia::render('form/list', [
-            'forms' => Form::with('user')->orderBy('id', 'desc')->paginate()
+            'forms' => Form::where('is_active', true)
+                ->with('user')
+                ->orderBy('id', 'desc')
+                ->paginate()
         ]);
     }
 
@@ -27,7 +31,9 @@ class FormController extends Controller
      */
     public function create()
     {
-        return Inertia::render('form/create');
+        return Inertia::render('form/create', [
+            'fieldTypes' => FormFieldType::where('is_active', true)->get()
+        ]);
     }
 
     /**
@@ -64,7 +70,8 @@ class FormController extends Controller
      */
     public function show(Form $form)
     {
-        //
+
+        return $form->load(['fields.type', 'fields.options'])->toArray();
     }
 
     /**

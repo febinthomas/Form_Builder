@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FormField extends Model
 {
@@ -30,5 +31,13 @@ class FormField extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(FormFieldType::class, 'form_field_type_id');
+    }
+
+    /**
+     * Get the options that owns the Field.
+     */
+    public function options(): HasMany
+    {
+        return $this->hasMany(FormFieldOption::class);
     }
 }

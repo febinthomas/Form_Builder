@@ -13,6 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('forms', [FormController::class, 'index'])->name('form.list');
     Route::get('forms/create', [FormController::class, 'create'])->name('form.create');
     Route::post('forms/store', [FormController::class, 'store'])->name('form.store');
+    Route::get('forms/{form}', [FormController::class, 'show'])->name('form.show');
 });
 
 require __DIR__ . '/settings.php';

@@ -62,7 +62,7 @@ export default function Forms({ forms }) {
                     </td>
                     <td className="py-3 px-4 text-center align-middle">
                       <a
-                        href={route('form.create', { id: form.id })}
+                        href={route('form.show', { form: form.id })}
                         aria-label={`View details for ${form.id.title}`}
                         title="View details"
                         className="inline-flex items-center justify-center p-1 rounded hover:bg-gray-100 text-blue-500 hover:text-blue-700 transition-colors"
