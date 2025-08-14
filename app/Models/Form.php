@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Form extends Model
 {
     /** @use HasFactory<\Database\Factories\FormFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     /**
@@ -24,7 +25,7 @@ class Form extends Model
         'background_color',
         'user_id',
         'is_label_enabled',
-        'is_active'
+        'is_active',
     ];
 
     /**

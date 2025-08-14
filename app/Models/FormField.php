@@ -15,7 +15,7 @@ class FormField extends Model
      */
     protected $fillable = [
         'label',
-        'form_field_type_id'
+        'form_field_type_id',
     ];
 
     /**
@@ -25,6 +25,7 @@ class FormField extends Model
     {
         return $this->belongsTo(Form::class);
     }
+
     /**
      * Get the Form Field type.
      */

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Forms;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFormRequest;
 use App\Http\Requests\UpdateFormRequest;
 use App\Models\Form;
-use Inertia\Inertia;
-use Inertia\Response;
-use App\Http\Controllers\Controller;
 use App\Models\FormFieldType;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class FormController extends Controller
 {
@@ -22,7 +21,7 @@ class FormController extends Controller
             'forms' => Form::where('is_active', true)
                 ->with('user')
                 ->orderBy('id', 'desc')
-                ->paginate()
+                ->paginate(),
         ]);
     }
 
@@ -32,7 +31,7 @@ class FormController extends Controller
     public function create()
     {
         return Inertia::render('form/create', [
-            'fieldTypes' => FormFieldType::where('is_active', true)->get()
+            'fieldTypes' => FormFieldType::where('is_active', true)->get(),
         ]);
     }
 
@@ -44,7 +43,7 @@ class FormController extends Controller
         $validatedFormData = $request->safe()->only([
             'title',
             'background_color',
-            'is_label_enabled'
+            'is_label_enabled',
         ]);
         $validatedFormData['is_active'] = 1;
         $validatedFormData['user_id'] = $request->user()->id;
@@ -54,7 +53,7 @@ class FormController extends Controller
             $form = Form::create($validatedFormData);
             foreach ($validatedFieldData as $fieldData) {
                 $fields = $form->fields()->createMany($fieldData);
-                //Todo: Save Field Options
+                // Todo: Save Field Options
             }
             DB::commit();
         } catch (\Throwable $e) {
@@ -62,6 +61,7 @@ class FormController extends Controller
             report($e);
             throw $e;
         }
+
         return to_route('form.list');
     }
 
