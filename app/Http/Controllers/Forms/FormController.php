@@ -54,8 +54,12 @@ class FormController extends Controller
         ]);
         $formData['user_id'] = $request->user()->id;
         $fieldsData = $request->safe()->input('custom_form_fields', []);
-        $this->formService->createForm($formData, $fieldsData);
-        return to_route('form.list')->with('success', 'Form created successfully!');
+        try {
+            $this->formService->createForm($formData, $fieldsData);
+            return to_route('form.list')->with('success', 'Form created successfully!');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Something went wrong while creating the form. Please try again.');
+        }
     }
 
     /**
@@ -65,7 +69,7 @@ class FormController extends Controller
     {
 
         return Inertia::render('form/view', [
-            'formDetails' => $form->load(['fields.type', 'fields.options'])->get(),
+            'formDetails' => $form->load(['fields.type', 'fields.options']),
         ]);
     }
 
