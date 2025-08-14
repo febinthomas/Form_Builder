@@ -17,10 +17,11 @@ class FormFieldTypeFactory extends Factory
     public function definition(): array
     {
         $word = $this->faker->word();
+
         return [
             'type' => $word,
             'label' => ucwords($word),
-            'options_required' => false
+            'options_required' => false,
         ];
     }
 }

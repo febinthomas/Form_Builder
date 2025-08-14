@@ -17,11 +17,11 @@ class FormFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'        => $this->faker->sentence(),
-            'user_id'         => 1,
-            'is_label_enabled'    => $this->faker->boolean(),
-            'background_color'       => $this->faker->word(),
-            'is_active' => $this->faker->boolean()
+            'title' => $this->faker->sentence(),
+            'user_id' => 1,
+            'is_label_enabled' => $this->faker->boolean(),
+            'background_color' => $this->faker->word(),
+            'is_active' => $this->faker->boolean(),
         ];
     }
 }

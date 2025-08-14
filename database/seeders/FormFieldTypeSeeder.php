@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\FormFieldType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class FormFieldTypeSeeder extends Seeder
@@ -18,14 +17,14 @@ class FormFieldTypeSeeder extends Seeder
             [
                 'type' => 'text',
                 'label' => 'Text Field',
-                'options_required' => false
+                'options_required' => false,
             ]
         );
         FormFieldType::factory()->create(
             [
                 'type' => 'select',
                 'label' => 'Drop Down',
-                'options_required' => true
+                'options_required' => true,
             ]
         );
     }

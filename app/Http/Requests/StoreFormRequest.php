@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\FormFieldType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\FormFieldType;
 
 class StoreFormRequest extends FormRequest
 {
@@ -32,7 +32,7 @@ class StoreFormRequest extends FormRequest
             'custom_form_fields.*.form_field_type_id' => [
                 'required',
                 'integer',
-                Rule::exists((new FormFieldType)->getTable(), 'id')
+                Rule::exists((new FormFieldType)->getTable(), 'id'),
             ],
             'custom_form_fields.*.values.*.option' => ['string'],
             'custom_form_fields.*.values.*.label' => ['string'],
