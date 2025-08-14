@@ -71,7 +71,9 @@ class FormController extends Controller
     public function show(Form $form)
     {
 
-        return $form->load(['fields.type', 'fields.options'])->toArray();
+        return Inertia::render('form/view', [
+            'formDetails' => $form->load(['fields.type', 'fields.options'])->get(),
+        ]);
     }
 
     /**
