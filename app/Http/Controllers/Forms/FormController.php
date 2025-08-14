@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Forms;
 
 use App\Http\Requests\StoreFormRequest;
 use App\Http\Requests\UpdateFormRequest;
 use App\Models\Form;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Http\Controllers\Controller;
 
 class FormController extends Controller
 {
@@ -26,7 +27,7 @@ class FormController extends Controller
     public function create()
     {
         //
-        return Inertia::render('dashboard');
+        return Inertia::render('form/create');
     }
 
     /**

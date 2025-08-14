@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\FormFieldType;
+
+class StoreFormRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'title' => ['required', 'string'],
+            'background_color' => ['required', 'string', 'hex_color'],
+            'custom_form_fields' => ['required', 'array', 'min:1'],
+            'custom_form_fields.*.label' => ['required', 'string'],
+            'custom_form_fields.*.type_id' => [
+                'required', 
+                'integer', 
+                Rule::exists((new FormFieldType)->getTable(), 'id')
+            ],
+            'custom_form_fields.*.values.*.option' => ['string'],
+            'custom_form_fields.*.values.*.label' => ['string'],
+        ];
+    }
+}
