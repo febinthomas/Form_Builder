@@ -8,6 +8,7 @@ use App\Models\Form;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
@@ -26,7 +27,6 @@ class FormController extends Controller
      */
     public function create()
     {
-        //
         return Inertia::render('form/create');
     }
 
@@ -35,7 +35,28 @@ class FormController extends Controller
      */
     public function store(StoreFormRequest $request)
     {
-        //
+        $validatedFormData = $request->safe()->only([
+            'title',
+            'background_color',
+            'is_label_enabled'
+        ]);
+        $validatedFormData['is_active'] = 1;
+        $validatedFormData['user_id'] = $request->user()->id;
+        $validatedFieldData = $request->safe()->only('custom_form_fields');
+        DB::beginTransaction();
+        try {
+            $form = Form::create($validatedFormData);
+            foreach ($validatedFieldData as $fieldData) {
+                $fields = $form->fields()->createMany($fieldData);
+                //Todo: Save Field Options
+            }
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            report($e);
+            throw $e;
+        }
+        return to_route('form.list');
     }
 
     /**

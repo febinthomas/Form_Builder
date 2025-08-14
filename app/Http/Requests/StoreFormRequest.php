@@ -25,12 +25,13 @@ class StoreFormRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
+            'is_label_enabled' => ['required', 'boolean'],
             'background_color' => ['required', 'string', 'hex_color'],
             'custom_form_fields' => ['required', 'array', 'min:1'],
             'custom_form_fields.*.label' => ['required', 'string'],
-            'custom_form_fields.*.type_id' => [
-                'required', 
-                'integer', 
+            'custom_form_fields.*.form_field_type_id' => [
+                'required',
+                'integer',
                 Rule::exists((new FormFieldType)->getTable(), 'id')
             ],
             'custom_form_fields.*.values.*.option' => ['string'],
