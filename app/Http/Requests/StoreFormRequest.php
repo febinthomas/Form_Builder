@@ -26,6 +26,7 @@ class StoreFormRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'is_label_enabled' => ['required', 'boolean'],
+            'is_active' => ['required', 'boolean'],
             'background_color' => ['required', 'string', 'hex_color'],
             'custom_form_fields' => ['required', 'array', 'min:1'],
             'custom_form_fields.*.label' => ['required', 'string'],

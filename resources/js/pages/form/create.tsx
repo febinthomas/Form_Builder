@@ -38,7 +38,8 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         title: '',
-        is_label_enabled:1
+        is_label_enabled:1,
+        is_active:1
     });
     const [customFields, setCustomFields] = useState([]);
 

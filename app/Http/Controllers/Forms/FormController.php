@@ -7,11 +7,17 @@ use App\Http\Requests\StoreFormRequest;
 use App\Http\Requests\UpdateFormRequest;
 use App\Models\Form;
 use App\Models\FormFieldType;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use App\Services\FormService;
 
 class FormController extends Controller
 {
+    protected $formService;
+
+    public function __construct(FormService $formService)
+    {
+        $this->formService = $formService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -40,29 +46,16 @@ class FormController extends Controller
      */
     public function store(StoreFormRequest $request)
     {
-        $validatedFormData = $request->safe()->only([
+        $formData = $request->safe()->only([
             'title',
             'background_color',
             'is_label_enabled',
+            'is_active'
         ]);
-        $validatedFormData['is_active'] = 1;
-        $validatedFormData['user_id'] = $request->user()->id;
-        $validatedFieldData = $request->safe()->only('custom_form_fields');
-        DB::beginTransaction();
-        try {
-            $form = Form::create($validatedFormData);
-            foreach ($validatedFieldData as $fieldData) {
-                $fields = $form->fields()->createMany($fieldData);
-                // Todo: Save Field Options
-            }
-            DB::commit();
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            report($e);
-            throw $e;
-        }
-
-        return to_route('form.list');
+        $formData['user_id'] = $request->user()->id;
+        $fieldsData = $request->safe()->input('custom_form_fields', []);
+        $this->formService->createForm($formData, $fieldsData);
+        return to_route('form.list')->with('success', 'Form created successfully!');
     }
 
     /**
