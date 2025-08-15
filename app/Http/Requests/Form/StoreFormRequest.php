@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Form;
 
 use App\Models\FormFieldType;
 use Illuminate\Foundation\Http\FormRequest;

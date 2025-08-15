@@ -55,13 +55,16 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
 
         e.preventDefault();
         setCustomFields([...customFields, { value: "" }]);
-        setData(prev => ({
-            ...prev,
-            custom_form_fields: [
-                ...(prev.custom_form_fields || []),
-                { form_field_type_id: data.type, label: data.fieldName }
-            ]
-        }));
+        if(data.fieldName && data.type) {
+            setData(prev => ({
+                ...prev,
+                custom_form_fields: [
+                    ...(prev.custom_form_fields || []),
+                    { form_field_type_id: data.type, label: data.fieldName }
+                ]
+            }));
+        }
+        
     };
 
     return (
@@ -72,7 +75,7 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
                 <div className="flex gap-8">
                     <div className="flex-1 max-w-xl">
                         <div className="space-y-6">
-                            <HeadingSmall title="Form information" description="Update your name and email address" />
+                            <HeadingSmall title="Form information" description="Fill your form details" />
 
                             <form onSubmit={submit} className="space-y-6">
                                 <div className="grid gap-2">

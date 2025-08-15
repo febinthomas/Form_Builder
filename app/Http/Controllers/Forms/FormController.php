@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Forms;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFormRequest;
-use App\Http\Requests\UpdateFormRequest;
+use App\Http\Requests\Form\StoreFormRequest;
+use App\Http\Requests\Form\UpdateFormRequest;
 use App\Models\Form;
 use App\Models\FormFieldType;
 use Inertia\Inertia;
