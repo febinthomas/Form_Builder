@@ -35,8 +35,9 @@ class StoreFormRequest extends FormRequest
                 'integer',
                 Rule::exists((new FormFieldType())->getTable(), 'id'),
             ],
-            'custom_form_fields.*.values.*.option' => ['string'],
-            'custom_form_fields.*.values.*.label' => ['string'],
+            'custom_form_fields.*.options' => ['array'],
+            'custom_form_fields.*.options.*.label' => ['string'],
+            'custom_form_fields.*.options.*.option' => ['string'],
         ];
     }
 }

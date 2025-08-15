@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 
 class FormControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
 
     #[Test]
     public function index_displays_active_forms()
@@ -65,7 +65,7 @@ class FormControllerTest extends TestCase
                 [
                     'label' => 'Field 1',
                     'form_field_type_id' => $fieldType->id,
-                    'values' => [
+                    'options' => [
                         ['option' => 'Option 1', 'label' => 'Option Label 1'],
                     ],
                 ],

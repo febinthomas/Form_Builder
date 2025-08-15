@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FormFieldOption extends Model
 {
-    //
+    protected $fillable = [
+        'label',
+        'option',
+    ];
 
     public function formField(): BelongsTo
     {

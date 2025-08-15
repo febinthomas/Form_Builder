@@ -38,8 +38,8 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         title: '',
-        is_label_enabled:1,
-        is_active:1
+        is_label_enabled: 1,
+        is_active: 1
     });
     const [customFields, setCustomFields] = useState([]);
 
@@ -55,16 +55,21 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
 
         e.preventDefault();
         setCustomFields([...customFields, { value: "" }]);
-        if(data.fieldName && data.type) {
+        if (data.fieldName && data.type) {
             setData(prev => ({
                 ...prev,
                 custom_form_fields: [
                     ...(prev.custom_form_fields || []),
-                    { form_field_type_id: data.type, label: data.fieldName }
+                    {
+                        form_field_type_id: data.type, 
+                        label: data.fieldName, 
+                        options: [
+                        ]
+                    }
                 ]
             }));
         }
-        
+
     };
 
     return (
@@ -178,7 +183,7 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
                             <InputError className="mt-2" message={errors.name} />
                         </div>
 
-                        <br/>
+                        <br />
                         <div className="grid gap-2">
                             <Label htmlFor="role">Field Type</Label>
 
