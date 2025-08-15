@@ -27,7 +27,7 @@ class FormController extends Controller
             'forms' => Form::where('is_active', true)
                 ->with('user')
                 ->orderBy('id', 'desc')
-                ->paginate(),
+                ->paginate(7),
         ]);
     }
 
@@ -56,9 +56,9 @@ class FormController extends Controller
         $fieldsData = $request->safe()->input('custom_form_fields', []);
         try {
             $this->formService->createForm($formData, $fieldsData);
-            return to_route('form.list')->with('success', 'Form created successfully!');
+            return to_route('form.list')->with('success', __('messages.form_creation_success'));
         } catch (\Exception $e) {
-            return back()->withInput()->with('error', 'Something went wrong while creating the form. Please try again.');
+            return back()->withInput()->with('error', __('messages.form_creation_error'));
         }
     }
 
