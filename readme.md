@@ -2,11 +2,21 @@
 
 Using Laravel's [React Starter Kit](https://github.com/laravel/react-starter-kit)
 
-### Completed Areas
+### Tech Stack
+ - **Frontend**: React, Inertia, TypeScript, Tailwind, shadcn/ui, radix-ui
+ - **Backend**: Laravel 12, PHP 8.2+
+ - **Database**: PostgreSQL or any other databases supported by Laravel 12
+ - **Environment**: Docker (Using Laravel Sail)
+ - **Coding Standards**: PSR12 (Using Laravel Pint)
+ - **Testing**: Pest PHP (Yet to Implement)
 
-- Dockerization using Laravel Sail
-- Authentication using Laravel in-built features
-- Forms Listing
+
+### Pending Tasks
+- Unit Testing
+- Localization in react frontend (Already enabled in Laravel backend)
+- UI/UX Improvements and refactoring
+- Support for more form fields in frontend (Backend designed to support most type of form fields)
+- More features Eg: edit form, remove form etc.
 
 ### Database Design
 <img width="971" height="793" alt="Image" src="https://github.com/user-attachments/assets/449d4bfa-21fe-490c-9784-4ea1c13b552e" />
