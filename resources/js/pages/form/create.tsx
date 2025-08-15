@@ -69,8 +69,8 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
             <Head title="Form settings" />
 
             <FormLayout>
-                <div class="flex gap-8">
-                    <div class="flex-1 max-w-xl">
+                <div className="flex gap-8">
+                    <div className="flex-1 max-w-xl">
                         <div className="space-y-6">
                             <HeadingSmall title="Form information" description="Update your name and email address" />
 
@@ -154,7 +154,7 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
                             </form>
                         </div>
                     </div>
-                    <div class="w-1/3 border-l border-gray-300 pl-8">
+                    <div className="w-1/3 border-l border-gray-300 pl-8">
                         <HeadingSmall title="Form Fields" description="Add new Fields to the form" />
 
 
