@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 
 class FormControllerTest extends TestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
 
     #[Test]
     public function index_displays_active_forms()
@@ -28,8 +28,8 @@ class FormControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertInertia(
             fn ($page) =>
-        $page->component('form/list')
-            ->has('forms.data', 1) // Only the active form should be returned
+            $page->component('form/list')
+                ->has('forms.data', 1) // Only the active form should be returned
         );
     }
 
@@ -45,8 +45,8 @@ class FormControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertInertia(
             fn ($page) =>
-        $page->component('form/create')
-            ->has('fieldTypes', 1) // Only active field types
+            $page->component('form/create')
+                ->has('fieldTypes', 1) // Only active field types
         );
     }
 
