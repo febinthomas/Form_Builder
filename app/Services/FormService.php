@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Form;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class FormService
 {
@@ -18,11 +19,12 @@ class FormService
         try {
             $form = Form::create($formData);
 
-            if (!empty($fieldsData)) {
-                $form->fields()->createMany($fieldsData);
-                // Todo: Save Field Options if needed
+            foreach ($fieldsData as $fieldData) {
+                $field = $form->fields()->create(Arr::except($fieldData, 'options'));
+                if (!empty($fieldData['options'])) {
+                    $field->options()->createMany($fieldData['options']);
+                }
             }
-
             DB::commit();
             return $form;
         } catch (\Throwable $e) {
