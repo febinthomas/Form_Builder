@@ -33,7 +33,7 @@ type ProfileForm = {
     email: string;
 };
 
-export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
+export default function CreateForm({ fieldTypes }: { fieldTypes: string[]}) {
     const { auth } = usePage<SharedData>().props;
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
@@ -41,7 +41,6 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
         is_label_enabled: 1,
         is_active: 1
     });
-    const [customFields, setCustomFields] = useState([]);
 
 
     const submit: FormEventHandler = (e) => {
@@ -54,7 +53,6 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
     const addField: FormEventHandler = (e) => {
 
         e.preventDefault();
-        setCustomFields([...customFields, { value: "" }]);
         if (data.fieldName && data.type) {
             setData(prev => ({
                 ...prev,
@@ -64,6 +62,8 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
                         form_field_type_id: data.type, 
                         label: data.fieldName, 
                         options: [
+                            //{option:1,label:4},
+                            //{option:3,label:5},
                         ]
                     }
                 ]
@@ -132,6 +132,9 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
 
                                     <InputError className="mt-2" message={errors.background_color} />
                                     <InputError className="mt-2" message={errors.custom_form_fields} />
+                                    <div>
+  <pre>{JSON.stringify(errors.custom_form_fields, null, 2)}</pre>
+</div>
 
                                 </div>
 
@@ -158,6 +161,8 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
                                     >
                                         <p className="text-sm text-neutral-600">Saved</p>
                                     </Transition>
+                                    <InputError className="mt-2" message={errors.custom_form_fields} />
+
                                 </div>
                             </form>
                         </div>
@@ -197,10 +202,16 @@ export default function CreateForm({ mustVerifyEmail, status }: { mustVerifyEmai
                                 >
                                     <SelectValue placeholder="Choose a type" />
                                 </SelectTrigger>
+
                                 <SelectContent>
-                                    <SelectItem value="1">Text</SelectItem>
+                                    {fieldTypes?.map((type, idx) => (
+
+                                        <SelectItem value={type.id}>{type.label}</SelectItem>
+                                    ))}
                                 </SelectContent>
+
                             </Select>
+                            
 
                             <InputError className="mt-2" message={errors.role} />
                         </div>
