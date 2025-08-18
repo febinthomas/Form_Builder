@@ -33,7 +33,7 @@ type ProfileForm = {
     email: string;
 };
 
-export default function CreateForm({ fieldTypes }: { fieldTypes: string[]}) {
+export default function CreateForm({ fieldTypes }: { fieldTypes: string[] }) {
     const { auth } = usePage<SharedData>().props;
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
@@ -59,8 +59,8 @@ export default function CreateForm({ fieldTypes }: { fieldTypes: string[]}) {
                 custom_form_fields: [
                     ...(prev.custom_form_fields || []),
                     {
-                        form_field_type_id: data.type, 
-                        label: data.fieldName, 
+                        form_field_type_id: data.type,
+                        label: data.fieldName,
                         options: [
                             //{option:1,label:4},
                             //{option:3,label:5},
@@ -132,9 +132,6 @@ export default function CreateForm({ fieldTypes }: { fieldTypes: string[]}) {
 
                                     <InputError className="mt-2" message={errors.background_color} />
                                     <InputError className="mt-2" message={errors.custom_form_fields} />
-                                    <div>
-  <pre>{JSON.stringify(errors.custom_form_fields, null, 2)}</pre>
-</div>
 
                                 </div>
 
@@ -161,8 +158,6 @@ export default function CreateForm({ fieldTypes }: { fieldTypes: string[]}) {
                                     >
                                         <p className="text-sm text-neutral-600">Saved</p>
                                     </Transition>
-                                    <InputError className="mt-2" message={errors.custom_form_fields} />
-
                                 </div>
                             </form>
                         </div>
@@ -211,7 +206,7 @@ export default function CreateForm({ fieldTypes }: { fieldTypes: string[]}) {
                                 </SelectContent>
 
                             </Select>
-                            
+
 
                             <InputError className="mt-2" message={errors.role} />
                         </div>
